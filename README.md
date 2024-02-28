@@ -1,1 +1,1 @@
-# kerzz-restoran-list
+# Kerzz restoran listelenmesi.
