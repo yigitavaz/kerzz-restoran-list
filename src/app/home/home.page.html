@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title
+      style="text-align: center; justify-content: center; font-size: 14px; font-weight: 700; color: #000;">
+      Ana Sayfa
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page" class="ion-padding">
+  <ion-card *ngFor="let restaurant of restaurants" >
+    <div class="card-rate">
+      <p class="rate-text"><i style="color: #FFFFFF;" class="fas fa-star"></i> {{restaurant.storeInfo.rate}}</p>
+    </div>
+    <img *ngIf="restaurant.images && restaurant.images.length > 0; else defaultImage "[src]=" restaurant.images[0].base64" alt="Restaurant Image">
+    <ng-template #defaultImage>
+      <img [src]="restaurant.images?.length ? restaurant.images[0].base64 : 'https://i.ytimg.com/vi/piqldPGVZ1g/hqdefault.jpg' "alt="Restaurant Image">
+    </ng-template>
+    <div class="card-title">
+      <h3>{{ restaurant.title }}</h3>
+    </div>
+    <div class="card-subtitle">
+      <p class="cesit">Coffee, Breakfast</p>
+      <p class="min-tutar">  <i style="color: #000;" class="fas fa-shopping-basket"></i> Min. Sipariş Tutarı: ₺{{restaurant.storeInfo.minOrderPrice}}</p>
+    </div>
+    <div class="card-restoran">
+      <p class="card-distance"> - km yakınında</p>
+      <p class="card-hours"><span [ngStyle]="{'color': restaurant.storeInfo.status === 'open' ? '#34C47C' : 'inherit'}">
+        {{ restaurant.storeInfo.status === 'open' ? 'İşletme Açık' : '' }}
+      </span> {{restaurant.storeInfo.workingHours[0].open}} {{restaurant.storeInfo.workingHours[0].close}} </p>
+    </div>
+  </ion-card>
+  
+  <!--infinite-scroll-->
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Daha fazla yükleniyor...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
