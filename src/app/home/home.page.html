@@ -24,10 +24,13 @@
       <p class="min-tutar">  <i style="color: #000;" class="fas fa-shopping-basket"></i> Min. Sipariş Tutarı: ₺{{restaurant.storeInfo.minOrderPrice}}</p>
     </div>
     <div class="card-restoran">
-      <p class="card-distance"> - km yakınında</p>
-      <p class="card-hours"><span [ngStyle]="{'color': restaurant.storeInfo.status === 'open' ? '#34C47C' : 'inherit'}">
-        {{ restaurant.storeInfo.status === 'open' ? 'İşletme Açık' : '' }}
-      </span> {{restaurant.storeInfo.workingHours[0].open}} {{restaurant.storeInfo.workingHours[0].close}} </p>
+      <p class="card-distance">{{restaurant.distance}} km yakınında</p>
+      <p class="card-hours">
+        <span [ngStyle]="{'color': restaurant.storeInfo.status === 'open' ? '#34C47C' : restaurant.storeInfo.status === 'closed' ? '#FF0000' : 'inherit'}">
+          {{ restaurant.storeInfo.status === 'open' ? 'İşletme Açık' : restaurant.storeInfo.status === 'closed' ? 'İşletme Kapalı' : '' }}
+        </span> 
+        {{restaurant.storeInfo.workingHours[0].open}} - {{restaurant.storeInfo.workingHours[0].close}}
+      </p>
     </div>
   </ion-card>
   
