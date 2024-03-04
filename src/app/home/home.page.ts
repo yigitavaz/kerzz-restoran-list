@@ -54,7 +54,7 @@ export class HomePage {
         const restaurantLat = restaurant.location.coordinates[1];
         const restaurantLon = restaurant.location.coordinates[0];
         const distance = this.calculateDistance(this.latitude, this.longitude, restaurantLat, restaurantLon);
-        return { ...restaurant, distance: distance.toFixed(2) }; // Mesafeyi restoran objesine ekleyin
+        return { ...restaurant, distance: distance.toFixed(2) };
       });
 
       this.restaurants = [...this.restaurants, ...updatedRestaurants];
@@ -63,9 +63,9 @@ export class HomePage {
   }
 
   loadMore(event: IonInfiniteScrollCustomEvent<void>) {
-    this.loadData(); // Daha fazla veri yüklemek için loadData'yı tekrar çağırın
+    this.loadData();
 
-    event.target.complete(); // Yükleme işleminin tamamlandığını belirtin
+    event.target.complete();
   }
 
   calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -77,7 +77,7 @@ export class HomePage {
       Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon / 2) * Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Mesafe km cinsinden
+    const distance = R * c; // mesafe km cinsinden
     return distance;
   }
   
